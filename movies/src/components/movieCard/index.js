@@ -63,6 +63,7 @@ export default function MovieCard(props) {
           </Grid>
         </Grid>
       </CardContent>
+      
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
         <FavoriteIcon color="primary" fontSize="large" />
