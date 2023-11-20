@@ -5,9 +5,9 @@ import Spinner from '../components/spinner';
 import { useQuery } from 'react-query';
 import AddToFavoritesIcon  from "../components/cardIcons/addToFavorites";
 
-const UpcomingMoviesPage = (props) => {
+const UpcomingMoviesPage = () => {
 
-  const {  data, error, isLoading, isError }  = useQuery('discoverUpcoming', getUpcomingMovies)
+  const {  data, error, isLoading, isError }  = useQuery('Upcoming', getUpcomingMovies)
 
   if (isLoading) {
     return <Spinner />
@@ -16,29 +16,19 @@ const UpcomingMoviesPage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>
   }  
-  const movies = data?.results || [];
-  
+  const movies = data.results;
+
+  // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)
   localStorage.setItem('favorites', JSON.stringify(favorites))
+  // const addToFavorites = (movieId) => true 
 
-//   const addToFavorites = (movieId) => {
-//     const updatedMovies = movies.map((m) =>
-//       m.id === movieId ? { ...m, favorite: true } : m
-//     );
-//     setMovies(updatedMovies);
-//   };
-
-//   useEffect(() => {
-//     getUpcomingMovies().then(movies => {
-//       setMovies(movies);
-//     });
-//   }, []);
   return (
     <PageTemplate
       title="Upcoming Movies"
           movies={movies}
-            action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
+          action={(movie) => {
+            return <AddToFavoritesIcon movie={movie} />
       }}    
     />
   );
