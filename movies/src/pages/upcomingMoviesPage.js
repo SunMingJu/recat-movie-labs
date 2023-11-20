@@ -5,6 +5,7 @@ import Spinner from '../components/spinner';
 import { useQuery } from 'react-query';
 import PlaylistAddIcon from '../components/cardIcons/playlistAdd'
 
+//have done it in exrecise 1
 const UpcomingMoviesPage = () => {
 
   const {  data, error, isLoading, isError }  = useQuery('Upcoming', getUpcomingMovies)
